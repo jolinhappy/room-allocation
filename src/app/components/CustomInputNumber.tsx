@@ -31,15 +31,15 @@ const CustomInputNumber = ({
   const containerRef = useRef<HTMLInputElement>(null);
   const currentValue = Number(value);
 
-  const handleClickButton = (currentValue: number, clickType: ClickType) => {
+  const handleClickButton = (current: number, clickType: ClickType) => {
     containerRef.current?.focus();
-    let newValue = currentValue;
-    const canReduce = min ? currentValue > min : true;
-    const canAdd = max ? currentValue < max : true;
+    let newValue = current;
+    const canReduce = min ? current > min : true;
+    const canAdd = max ? current < max : true;
     if (clickType === ClickType.MINUS && canReduce) {
-      newValue = step ? currentValue - step : currentValue - 1;
+      newValue = step ? current - step : current - 1;
     } else if (clickType === ClickType.PLUS && canAdd) {
-      newValue = step ? currentValue + step : currentValue + 1;
+      newValue = step ? current + step : current + 1;
     }
     onChange({ target: { value: newValue.toString(), name: props.name } } as ChangeEvent<HTMLInputElement>);
   };
@@ -59,7 +59,7 @@ const CustomInputNumber = ({
         container.removeEventListener('blur', handleBlur, true);
       }
     };
-  }, [containerRef, onBlur, props.name]);
+  }, [containerRef, onBlur, props.name, value]);
 
   const plusButtonDisabledRule = isPlusButtonDisabled || currentValue === max;
   const minusButtonDisabledRule = isMinusButtonDisabled || currentValue === min;

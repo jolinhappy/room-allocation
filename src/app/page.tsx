@@ -39,7 +39,7 @@ const Home = () => {
     if (defaultRoomAllocation && roomAllocation.length === 0) {
       setRoomAllocation(defaultRoomAllocation);
     }
-  }, [guest]);
+  }, [roomAllocation.length]);
   return (
     <main className="flex min-h-screen flex-col items-center p-10">
       {roomAllocation && roomAllocation.length > 0 && (
