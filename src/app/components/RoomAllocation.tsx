@@ -19,8 +19,8 @@ const RoomAllocation = ({ guest, rooms, value, onChange, onBlur }: RoomAllocatio
     onChange(updatedRoom);
   };
 
-  const remainingAdult = adult - value.reduce((total, { adult }) => total + adult, 0);
-  const remainingChild = child - value.reduce((total, { child }) => total + child, 0);
+  const remainingAdult = adult - value.reduce((total, item) => total + item.adult, 0);
+  const remainingChild = child - value.reduce((total, item) => total + item.child, 0);
 
   const bannerVariant = adult > 0 ? 'primary' : 'error';
   const bannerDescribe =
@@ -51,7 +51,7 @@ const RoomAllocation = ({ guest, rooms, value, onChange, onBlur }: RoomAllocatio
               min={0}
               isPlusButtonDisabled={remainingAdult <= 0 || room.adult + room.child >= rooms[room.id].capacity}
               onChange={(event) => handleChangeGuestCount(event, room)}
-              onBlur={(value) => onBlur(value)}
+              onBlur={(valueData) => onBlur(valueData)}
             />
           </div>
           <div className="flex justify-between items-start  h-[80px]">
@@ -62,7 +62,7 @@ const RoomAllocation = ({ guest, rooms, value, onChange, onBlur }: RoomAllocatio
               min={0}
               isPlusButtonDisabled={remainingChild <= 0 || room.adult + room.child >= rooms[room.id].capacity}
               onChange={(event) => handleChangeGuestCount(event, room)}
-              onBlur={(value) => onBlur(value)}
+              onBlur={(valueData) => onBlur(valueData)}
             />
           </div>
         </div>
